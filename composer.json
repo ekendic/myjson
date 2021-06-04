@@ -1,0 +1,16 @@
+{
+    "name": "numersys/json-model",
+    "type": "library",
+    "description": "Json-Model is a data API for accessing, serializing, and deserializing JSON data.",
+    "keywords": ["json","pdo","mysql","serialize", "deserialize"],
+    "homepage": "https://www.elvedin.ca",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Elvedin Kendic",
+            "email": "ekendic@gmail.com",
+            "homepage": "https://www.elvedin.ca",
+            "role": "Developer"
+        }
+    ],
+}
