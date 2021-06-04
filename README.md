@@ -1,1 +1,1 @@
-# json-model
+# myJSON

@@ -1,7 +1,7 @@
 {
-    "name": "numersys/json-model",
+    "name": "numersys/myJSON",
     "type": "library",
-    "description": "Json-Model is a data API for accessing, serializing, and deserializing JSON data.",
+    "description": "myJSON is a data API for accessing, serializing, and deserializing JSON data.",
     "keywords": ["json","pdo","mysql","serialize", "deserialize"],
     "homepage": "https://www.elvedin.ca",
     "license": "MIT",
@@ -13,4 +13,7 @@
             "role": "Developer"
         }
     ],
+    "require": {
+        "symfony/http-foundation": "^5.3"
+    }
 }
