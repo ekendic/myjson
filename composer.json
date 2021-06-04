@@ -1,5 +1,5 @@
 {
-    "name": "numersys/myJSON",
+    "name": "numersys/myjson",
     "type": "library",
     "description": "myJSON is a data API for accessing, serializing, and deserializing JSON data.",
     "keywords": ["json","pdo","mysql","serialize", "deserialize"],
