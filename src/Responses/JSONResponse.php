@@ -73,29 +73,36 @@
             return $this;
         }
         public function toString() {
-            if($this->data instanceof Entity) {
-                if($this->getData()->hasData()) {
-                    $this->response = json_encode($this->getResource());
+          try {
+            if(!isset($this->response)) {
+                if($this->data instanceof Entity) {
+                    if($this->getData()->hasData()) {
+                        $this->response = \json_encode($this->getResource());
+                    }
+                    else {
+                        $this->response = (string) (new ResponseError(400, ["class"=>get_class($this)], "Response Error", "No data loaded for entity."));
+                    }
+                }
+                else if($this->data instanceof Collection) {
+                    if($this->getData()->hasData()) {
+                        $this->response = \json_encode($this->getCollection());
+                    }
+                    else {
+                        $this->response = (string) (new ResponseError(400, ["class"=>get_class($this)], "Response Error", "No data loaded for collection."));
+                    }
                 }
                 else {
-                    $this->response = (string) (new ResponseError(400, ["class"=>get_class($this)], "Response Error", "No data loaded for entity."));
+                    $this->response = \json_encode($this->data);
                 }
             }
-            else if($this->data instanceof Collection) {
-                if($this->getData()->hasData()) {
-                    $this->response = json_encode($this->getCollection());
-                }
-                else {
-                    $this->response = (string) (new ResponseError(400, ["class"=>get_class($this)], "Response Error", "No data loaded for collection."));
-                }
-            }
-            else {
-                $this->response = json_encode($this->data);
-            }
-            return $this->response;
+          }
+          catch(\Exception $ex) {
+            $this->response = $ex->getMessage();
+          }
+          return $this->response;
         }
         public function __toString() {
-            return (is_null($this->response) ? $this->toString() : $this->response);
+            return $this->toString();
         }
     }
  ?>
