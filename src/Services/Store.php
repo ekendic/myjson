@@ -1,5 +1,5 @@
 <?php
-    namespace myJSON\Service;
+    namespace myJSON\Services;
     use Symfony\Component\Cache\Adapter\AdapterInterface as Cache;
     use myJSON\Collections\PersistedCollection;
     use myJSON\Collections\Collection;
