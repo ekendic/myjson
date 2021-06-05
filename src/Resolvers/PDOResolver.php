@@ -143,7 +143,7 @@ class PDOResolver extends \myJSON\Library\Base implements ResolverInterface {
                 $index = $this->getTraitProperty($this->getEntity($type), $trait);
                 $properties[$index] = $trait->getData()->Field;
             }
-            if(count($properties)) {
+            if(\count($properties)) {
                 $this->properties->addItem($type, $properties);
                 $this->properties->saveCache();
             }
@@ -152,7 +152,7 @@ class PDOResolver extends \myJSON\Library\Base implements ResolverInterface {
     }
     public function getTraitProperty($entity, $trait) {
         $property = "";
-        $pieces = explode("_", $trait->getData()->Field);
+        $pieces = \explode("_", $trait->getData()->Field);
         foreach($pieces as $piece) {
             if($piece != "id" || $property == $entity) {
                 $property .= ucfirst($piece);
@@ -193,9 +193,9 @@ class PDOResolver extends \myJSON\Library\Base implements ResolverInterface {
         $traits = $this->getTraits($type);
         $filters = new FilterCollection();
         if(count($attributes ?? [])) {
-            $keys = array_keys($attributes);
-            $values = array_values($attributes);
-            for($i = 0; $i < count($keys); $i++) {
+            $keys = \array_keys($attributes);
+            $values = \array_values($attributes);
+            for($i = 0; $i < \count($keys); $i++) {
                 $trait = $traits->findByAttribute($keys[$i]);
                 if(isset($trait)) {
                     $filters->attribute($trait->getId(), $this->decodeValue($values[$i], $trait->getType()), (isset($operators[$keys[$i]]) ? $operators[$keys[$i]] : null));
@@ -208,8 +208,8 @@ class PDOResolver extends \myJSON\Library\Base implements ResolverInterface {
         $index = null;
         $column = $trait->getData();
         if($column->Key == "" || $column->Key == "UNI") {
-            $index = strstr($column->Field, "_");
-            $index = str_replace("_","", $index);
+            $index = \strstr($column->Field, "_");
+            $index = \str_replace("_","", $index);
         }
         return $index;
     }
@@ -228,7 +228,7 @@ class PDOResolver extends \myJSON\Library\Base implements ResolverInterface {
     public function encodeValue($value, $type = null) {
         switch($type) {
             case "binary":
-                $value = bin2hex($value);
+                $value = \bin2hex($value);
             break;
         }
         return $value;
@@ -236,7 +236,7 @@ class PDOResolver extends \myJSON\Library\Base implements ResolverInterface {
     public function decodeValue($value, $type=null) {
         switch($type) {
             case "int":
-                $value = intval($value);
+                $value = \intval($value);
             break;
             case "datetime":
                 $value = (!isset($value) ? null : self::fromISODateTime($value));
@@ -246,7 +246,7 @@ class PDOResolver extends \myJSON\Library\Base implements ResolverInterface {
             break;
             case "binary":
                 try {
-                    $value = hex2bin($value);
+                    $value = \hex2bin($value);
                 }
                 catch(\Exception $ex) {
                     $a = $ex;

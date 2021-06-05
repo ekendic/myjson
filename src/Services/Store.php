@@ -148,18 +148,24 @@
             return $record;
         }
         private function normalizeRecord($record, $parameters) {
-            if(isset($parameters)) {
-                if(count($parameters) <= $record->getTraits()->length()) {
-                    for($i = 0; $i < $record->getTraits()->length(); $i++) {
-                        $trait = $record->getTraits()->objectAt($i)->setNormalValue((isset($parameters[$i]) ? $parameters[$i] : null));
-                        $record->setValue($trait->getId(), $trait->getNativeValue());
-                    }
-                    $record->setId($this->encodeRecordKey($record->getClass(), $record->getTraits()->objectAt(0)->getNormalValue()));
-                }
-                else {
-                    throw new \Exception("Too many parameters specified for " . $record->getClass() . ". Check the " . $record->getName() . " for parameters.");
-                }
-            }
+          if(isset($parameters)) {
+              if(count($parameters) <= $record->getTraits()->length()) {
+                  for($i = 0; $i < $record->getTraits()->length(); $i++) {
+                      $trait = $record->getTraits()->objectAt($i);
+                      if($trait->isKey()) {
+                        $trait->setNativeValue((isset($parameters[$i]) ? $parameters[$i] : null));
+                      }
+                      else {
+                        $trait->setNormalValue((isset($parameters[$i]) ? $parameters[$i] : null));
+                      }
+                      $record->setValue($trait->getId(), $trait->getNativeValue());
+                  }
+                  $record->setId($this->encodeRecordKey($record->getClass(), $record->getTraits()->objectAt(0)->getNormalValue()));
+              }
+              else {
+                  throw new \Exception("Too many parameters specified for " . $record->getClass() . ". Check the " . $record->getName() . " for parameters.");
+              }
+          }
             return $this;
         }
         public function getAttribute($var) {

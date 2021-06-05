@@ -122,7 +122,7 @@
             return $this;
         }
         public function setNativeValue($parameter) {
-            $this->getEntity()->__set($this->getId(), $parameter);
+            $this->getEntity()->setValue($this->getId(), $parameter);
             return $this;
         }
         public function toArray() {
