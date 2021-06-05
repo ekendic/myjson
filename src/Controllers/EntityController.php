@@ -8,7 +8,7 @@ use myJSON\Providers\PDOProvider;
 use myJSON\Entities\DecoratedEntity;
 use myJSON\Serializers\EntitySerializer;
 
-class EntityController extends \Symfony\Bundle\FrameworkBundle\Controller\Controller {
+class EntityController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController {
     protected $request = null;
     protected $response = null;
     protected $data = null;

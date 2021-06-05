@@ -14,7 +14,8 @@
         }
     ],
     "require": {
-        "symfony/http-foundation": "^5.3"
+        "symfony/http-foundation": "^5.3",
+        "symfony/framework-bundle": "^5.3"
     },
     "autoload": {
       "psr-4": {"myJSON\\" : "src/"}
