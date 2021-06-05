@@ -94,7 +94,7 @@
                     $this->response = $this->data;
                 }
             }
-            return $this->response;
+            return $this->response ?? "";
         }
         public function __toString() {
             return $this->toString();
