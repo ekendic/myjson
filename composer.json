@@ -15,7 +15,8 @@
     ],
     "require": {
         "symfony/http-foundation": "^5.3",
-        "symfony/framework-bundle": "^5.3"
+        "symfony/framework-bundle": "^5.3",
+        "tobscure/json-api": "^0.4.1"
     },
     "autoload": {
       "psr-4": {"myJSON\\" : "src/"}
