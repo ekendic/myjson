@@ -58,12 +58,12 @@
 			$this->_class = $value;
 			return $this;
 		}
-        public function toCache($key, $value, $tags=[], $expiration=3600) {
+        public function toCache($key, $value, $tags=null, $expiration=3600) {
             $item = null;
             if(isset($this->_cache)) {
                 $item = $this->_cache->getItem($key);
                 $item->set($value);
-				$item->tag($tags);
+				if(isset($tags)) $item->tag($tags);
 				$item->expiresAfter($expiration);
                 $this->_cache->save($item);
             }
