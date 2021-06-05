@@ -31,7 +31,7 @@
             $ret = array();
             if($entity->isValid()) {
                 foreach($entity->getTraits()->getData() as $trait) {
-                    if(!$trait->isIdentity()) {
+                    if(!$trait->isIdentity() && !$trait->isKey()) {
                         $ret[$trait->getAttribute()] = $trait->getNormalValue();
                     }
                 }
