@@ -367,8 +367,12 @@
         }
         public function findAll($table, FilterCollection $filter) {
             $query = new QueryBuilder();
-            $query->append("SELECT * FROM `" . $table . "` WHERE ");
-            $query->match($filter, $table)->append(";");
+            $query->append("SELECT * FROM `" . $table . "`");
+            if($filter->hasData()) {
+              $query->append(" WHERE ");
+              $query->match($filter, $table);
+            }
+            $query->append(";");
             $result = $this->getDriver()->prepare($query);
             $data = null;
             try {
