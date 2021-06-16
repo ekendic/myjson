@@ -10,6 +10,7 @@ use myJSON\Collections\TraitCollection;
 use myJSON\Collections\PersistedCollection;
 use myJSON\Collections\FilterCollection;
 use myJSON\Traits\PDOTrait;
+use myJSON\Entities\PersistedEntity;
 use myJSON\Adapter\AdapterInterface as AdapterInterface;
 
 class PDOResolver extends \myJSON\Library\Base implements ResolverInterface {
@@ -51,10 +52,20 @@ class PDOResolver extends \myJSON\Library\Base implements ResolverInterface {
         return $this->getAdapter()->findRecord($this->getEntity($type), [$trait->getId()=>$value]);
     }
     public function saveRecord($type, $data) {
+        $data = $this->normalizeData($type, $data);
         return $this->getAdapter()->saveRecord($this->getEntity($type), $data);
     }
     public function updateRecord($type, $id, $data) {
+        $data = $this->normalizeData($type, $data);
         return $this->getAdapter()->updateRecord($this->getEntity($type), [$this->getTraits($type)->objectAt(0)->getId()=>$id], $data);
+    }
+    public function normalizeData($type, $data) {
+      foreach($data as $key=>$value) {
+        if($value instanceof PersistedEntity) {
+          $data[$key] = $value->getTraits()->objectAt(0)->getNativeValue();
+        }
+      }
+      return $data;
     }
     public function destroyRecord($type, $id) {
         return $this->getAdapter()->destroyRecord($this->getEntity($type), [$this->getTraits($type)->objectAt(0)->getId()=>$id]);
