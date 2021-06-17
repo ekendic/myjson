@@ -115,7 +115,7 @@
             $this->getData()->{$property} = $value;
         }
         public function getNormalValue() {
-            return $this->getResolver()->encodeValue($this->getNativeValue(), $this->getType());
+            return $this->getResolver()->encodeValue(($this->getNativeValue() instanceof \myJSON\Entities\Entity ? $this->getNativeValue()->getTraits()->objectAt(0)->getNativeValue() : $this->getNativeValue()), $this->getType());
         }
         public function setNormalValue($parameter) {
             $this->setNativeValue($this->getResolver()->decodeValue($parameter, $this->getType()));
